@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using NextClass.Extensions;
@@ -120,7 +121,24 @@ namespace NextClass
                 return reader;
             }
         }
+        //public DataTable ExecuteReader(string cmdText,CommandType cmdType, params SqlParameter[] parameters)
+        //{
+        //    var conn = new SqlConnection(_connStr);
+        //    DataTable dt = new DataTable();
+        //    using (var cmd = new SqlCommand(cmdText, conn))
+        //    {
+        //        cmd.CommandType = cmdType;
+        //        cmd.Parameters.AddRange(parameters);
 
+        //        conn.Open();
+        //        // When using CommandBehavior.CloseConnection, the connection will be closed when the 
+        //        // IDataReader is closed.
+        //        var reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
+        //        dt.Load(cmd.ExecuteReader(CommandBehavior.SingleRow));
+
+        //        return dt;
+        //    }
+        //}
         // "exec [PSA_Traceability].[dbo].[Ask_SN] 'PSA','20800','38123456','38234345BP3456789012'"
         public DataTable ExecStoredProcedure(string db, string procName, params string[] args)
         {

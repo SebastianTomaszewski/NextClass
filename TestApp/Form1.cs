@@ -15,7 +15,7 @@ namespace TestApp
 {
     public partial class Form1 : Form
     {
-        private const string _db = "CofA_prod";
+        private const string _db = "JUNIOR_SQLTraceability_v2";
         private readonly string _sqlIp = @"192.168.0.187\DevIT";
         private readonly string _sqlUser = "sa";
         private readonly string _sqlPass = "b52mkmn5";
@@ -73,6 +73,28 @@ namespace TestApp
             var dataTable = fly.ExecStoredProcedure("CofA_Prod", "Test3", "dupa", "dupa");
 
             rTB.AppendText(dataTable.Rows[0][0].ToString());
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {        //EXEC	[dbo].[ASK_SN]	@LINE = N'JUNIOR',	@OP = 750, @PN = N'26111047',	@SN = N'26111047062173033700'
+
+            var dupa = new Traceability(new ConnectionStringModel(_sqlIp, _db, _sqlUser, _sqlPass));
+            if (!dupa.IsConnection()) return;
+            try
+            {
+                
+                DataTable tb = new DataTable();
+                tb.Load((dupa.Ask_SN("Junior", "750", "26111047", "26111047062173033700"));
+
+                var foo = tb.Rows[0][0].ToString();
+                MessageBox.Show(foo);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString());
+                throw;
+            }
 
         }
 
